@@ -2,9 +2,9 @@ from django.shortcuts import render
 from dz1.models import *
 
 
-def get_all_product(request):
+def get_all_products(request):
     products = Product.objects.all()
-
+    print(products)
     data = {
         'products': products
     }
@@ -12,9 +12,11 @@ def get_all_product(request):
     return render(request, 'product.html', context=data)
 
 
-def get_one_product(request, product):
-    product = Product.objects.get(product=id)
+def get_one_product(request, id):
+    product = Product.objects.get(id=id)
+
     data = {
-        'product': product
+        'product': product,
+        # 'reviews': reviews,
     }
-    return render(request, 'product.html', context=data)
+    return render(request, 'detail.html', context=data)
