@@ -16,6 +16,7 @@
     <a href="/products/{{ product.id }}/">
         <p>{{ product.id }}.{{ product.title }}</p>
     </a>
+    <l1>Количество отзывов продукта: {{ product.title }} - {{ product.review_set.count }}</l1>
 {% endfor %}
 
 </body>

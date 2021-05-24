@@ -17,6 +17,7 @@ class Product(models.Model):
     category = models.ForeignKey(Category, null=True, on_delete=models.SET_NULL)
 
     def __str__(self):
+
         return self.title
 
 
