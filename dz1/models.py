@@ -26,5 +26,5 @@ class Review(models.Model):
     product = models.ForeignKey(Product, null=True, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.text
+        return self.text    
 
