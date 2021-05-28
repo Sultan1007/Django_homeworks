@@ -82,6 +82,7 @@ class UserCreationForm(forms.Form):
 
     def clean_username(self):
         username = self.cleaned_data['username']
+        print(username)
         if User.objects.filter(username=username).count() > 0:
             raise ValidationError('Такой пользователь уже существует')
         return username
@@ -97,3 +98,17 @@ class UserCreationForm(forms.Form):
                                         password=self.cleaned_data['password1'])
         user.save()
         return user
+
+
+class LoginForm(forms.Form):
+    username = forms.CharField(max_length=100,
+                               widget=TextInput(attrs={
+                                   "placeholder": "NickName",
+                                   'class': 'form-control'
+                               }))
+    password = forms.CharField(max_length=100,
+                               widget=PasswordInput(attrs={
+                                   'placeholder': 'Password',
+                                   'class': 'form-control'
+
+                               }))
