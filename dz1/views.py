@@ -1,7 +1,7 @@
 from django.contrib import auth
 from django.shortcuts import render, redirect
 
-from dz1.forms import UserCreationForm, ProductForm, CategoryForm, LoginForm
+from dz1.forms import UserCreationForm, ProductForm, Product2Form, CategoryForm, LoginForm
 from dz1.models import *
 
 PAGE_SIZE = 3
@@ -121,3 +121,26 @@ def login(request):
 def logout(request):
     auth.logout(request)
     return redirect('/')
+
+
+def add_product2(request):
+    if request.method == 'POST':
+        form = Product2Form(data=request.POST)
+        print(form.is_valid())
+        print(form.errors)
+        if form.is_valid():
+            form.save()
+            return redirect('/products/')
+        else:
+            data = {
+                'form': form,
+                'username': auth.get_user(request).username
+            }
+            return render(request, 'add_product2.html', context=data)
+
+    return render(request, 'add_product2.html',
+                  context={'form': Product2Form})
+    # data = {
+    #     'form': Product2Form(),
+    #     'username': auth.get_user(request).username
+    # }

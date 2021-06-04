@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
-from django.forms import TextInput, PasswordInput
+from django.forms import TextInput, PasswordInput, Select
 
 from dz1.models import Product, Category
 
@@ -37,6 +37,35 @@ class ProductForm(forms.Form):
                                        'placeholder': 'Введите'
                                    }
                                ))
+
+
+class Product2Form(forms.ModelForm):
+    class Meta:
+        model = Product
+        fields = ["title",  "description", "price", "category"]
+
+    title = forms.CharField(min_length=2, max_length=15,
+                            required=True, label='Название товара ',
+                            widget=TextInput(
+                                attrs={
+                                    'placeholder': 'Введите товар'
+                                }
+                            ))
+    description = forms.CharField(min_length=2, max_length=100,
+                                  required=True, label='Описание',
+                                  widget=TextInput(
+                                      attrs={
+                                          'placeholder': 'Введите'
+                                      }
+                                  ))
+
+    price = forms.CharField(min_length=2, max_length=10,
+                            required=True, label='Цена',
+                            widget=TextInput(
+                                attrs={
+                                    'placeholder': 'Введите'
+                                }
+                            ))
 
 
 class CategoryForm(forms.Form):
